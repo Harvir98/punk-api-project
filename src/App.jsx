@@ -1,33 +1,65 @@
+import React, {useState} from 'react';
 import './App.css';
 import beers from './data/beers';
 import Main from './containers/Main/Main';
 import Navbar from './containers/Navbar/Navbar';
-// import Navbar from './containers/Navbar/Navbar';
-// import BeerCard from './components/BeerCard/BeerCard';
-// import BeerCardList from './components/BeerCardList/BeerCardList';
+
+const App = () => {
 
 
-function App() {
-
-  const highABV = beers.filter(beer => beer.abv > 6);
-  console.log(highABV);
-
-  const classicRange= beers.filter(beer => beer.abv >= 5 && beer.abv > 6);
-  console.log(classicRange);
-
-  const Acidic= beers.filter(beer => beer.abv >= 4 && beer.abv > 5);
-  console.log(Acidic);
+  
+  const [abv, setAbv] = useState(false);
+  const [range, setRange] = useState(false);
+  const [ph, setPh] = useState(false);
+  // const [beers, setBeers] = useState([]);
+  const beersArr = beers;
 
 
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleInput = (event) => {
+    const cleanInput = event.target.value;
+    setSearchTerm(cleanInput);
+  }
+
+  
+
+  const handleAbvClick = () => {
+    setAbv(!abv);
+  }
+
+  const handlePhClick = () => {
+    setPh(!ph)
+  }
+
+  const handleRangeClick = () => {
+    setRange(!range)
+  }
+
+  const searchResults = beersArr.filter((beer) => {
+    return beer.name.toLowerCase().includes(searchTerm)
+  })
+
+  const filteredBeers = searchResults.filter((beer) => {
+    if (!abv && !ph && !range) {
+      return true;
+    } else if (abv) {
+      return beer.abv > 6;
+    } else if (ph) {
+      return beer.ph > 4;
+    } else if (range) {
+      return beer.first_brewed.split("/")[1] < 2011;
+    }
+  });
 
 
   return (
-    <div className="App">
-      {/* <img src={beers[0].image_url} alt="" /> */}
-      <Navbar name={highABV}/>
-      <Main beersArr={beers}/>
+    <div >
+      <Navbar setSearchTerm={setSearchTerm} beersArr={beersArr} handleInput={handleInput} handleAbvClick={handleAbvClick} handlePhClick={handlePhClick} handleRangeClick={handleRangeClick} />
+      <Main beersArr={filteredBeers} />
     </div>
-  );
+  )
 }
+
 
 export default App;

@@ -1,8 +1,21 @@
-import React from 'react'
+import { useState } from 'react';
+import FilterItem from '../FilterItem/FilterItem';
 
-const FilterList = () => {
+const FilterList = (props) => {
+
+  const {
+    handleAbvClick,
+    handlePhClick,
+    handleRangeClick, filteredBeers} = props;
+
+
   return (
-    <div>FilterList</div>
+    <>
+    <h5>High ABV (>6.0%) <span><input type="checkbox" onChange={handleAbvClick} /></span></h5>
+    <h5>Classic Range<span><input type="checkbox"  onChange={handleRangeClick} /></span></h5>
+    <h5>Acidic ph (phfour)<span><input type="checkbox" onChange={handlePhClick}/></span></h5>
+  
+    </>
   )
 }
 
