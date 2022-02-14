@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import beers from './data/beers';
 import Main from './containers/Main/Main';
@@ -6,13 +6,13 @@ import Navbar from './containers/Navbar/Navbar';
 
 const App = () => {
 
-
+  const beersArr = beers;
   
   const [abv, setAbv] = useState(false);
   const [range, setRange] = useState(false);
   const [ph, setPh] = useState(false);
   // const [beers, setBeers] = useState([]);
-  const beersArr = beers;
+  
 
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -21,7 +21,6 @@ const App = () => {
     const cleanInput = event.target.value;
     setSearchTerm(cleanInput);
   }
-
   
 
   const handleAbvClick = () => {

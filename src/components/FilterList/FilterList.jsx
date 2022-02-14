@@ -6,7 +6,7 @@ const FilterList = (props) => {
   const {
     handleAbvClick,
     handlePhClick,
-    handleRangeClick, filteredBeers} = props;
+    handleRangeClick} = props;
 
 
   return (

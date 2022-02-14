@@ -16,7 +16,6 @@ const Navbar = (props) => {
 
   return (
     <>
-    <p>hello</p>
     <SearchBar label="albums" setSearchTerm={setSearchTerm} handleInput={handleInput} />
     <FilterList handleAbvClick={handleAbvClick} handlePhClick={handlePhClick} handleRangeClick={handleRangeClick} filteredBeers={filteredBeers}/>
     </>
