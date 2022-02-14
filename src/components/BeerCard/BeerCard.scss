@@ -2,16 +2,29 @@
   border: 2px solid black;
   margin: 10px;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  background-color: rgb(244, 244, 244);
+  font-family: Helvetica, sans-serif;
+  opacity: 60%;
   
   &__size {
-    
+    width: 50px;
     height: 100px;
   }
 
   &__description {
-    display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+   max-height: 150px;
+   min-height: 100px;
+   overflow-y: scroll;
   }
+}
+
+.beer:hover {
+  transform: scale(1.05);
+  background-color: lightblue;
+  opacity: 100%;
+  
 }

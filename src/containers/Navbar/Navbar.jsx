@@ -15,10 +15,10 @@ const Navbar = (props) => {
     filteredBeers} = props;
 
   return (
-    <>
+    <div className="navbar">
     <SearchBar label="albums" setSearchTerm={setSearchTerm} handleInput={handleInput} />
     <FilterList handleAbvClick={handleAbvClick} handlePhClick={handlePhClick} handleRangeClick={handleRangeClick} filteredBeers={filteredBeers}/>
-    </>
+    </div>
   )
 }
 

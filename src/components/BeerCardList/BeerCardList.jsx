@@ -5,7 +5,7 @@ import BeerCard from '../BeerCard/BeerCard'
 const BeerCardList = (props) => {
 
   return (
-    <div>
+    <div className="beercard">
       <BeerCard />
     </div>
   )

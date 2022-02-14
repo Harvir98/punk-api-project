@@ -1,43 +1,47 @@
-import React, {useEffect, useState} from 'react';
-import './App.css';
-import beers from './data/beers';
-import Main from './containers/Main/Main';
-import Navbar from './containers/Navbar/Navbar';
+import React, { useEffect, useState } from "react";
+import "./App.css";
+// import beers from "./data/beers";
+import Main from "./containers/Main/Main";
+import Navbar from "./containers/Navbar/Navbar";
+
 
 const App = () => {
-
-  const beersArr = beers;
   
+  const [apiBeers, setApiBeers] = useState([]);
+
+  useEffect(() => {
+
+    fetch("https://api.punkapi.com/v2/beers?page=1&per_page=80")
+      .then((response) => response.json())
+      .then((data) => setApiBeers(data));
+  }, []);
+
   const [abv, setAbv] = useState(false);
   const [range, setRange] = useState(false);
   const [ph, setPh] = useState(false);
-  // const [beers, setBeers] = useState([]);
-  
-
 
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleInput = (event) => {
     const cleanInput = event.target.value;
     setSearchTerm(cleanInput);
-  }
-  
+  };
 
   const handleAbvClick = () => {
     setAbv(!abv);
-  }
+  };
 
   const handlePhClick = () => {
-    setPh(!ph)
-  }
+    setPh(!ph);
+  };
 
   const handleRangeClick = () => {
-    setRange(!range)
-  }
+    setRange(!range);
+  };
 
-  const searchResults = beersArr.filter((beer) => {
-    return beer.name.toLowerCase().includes(searchTerm)
-  })
+  const searchResults = apiBeers.filter((beer) => {
+    return beer.name.toLowerCase().includes(searchTerm);
+  });
 
   const filteredBeers = searchResults.filter((beer) => {
     if (!abv && !ph && !range) {
@@ -51,14 +55,17 @@ const App = () => {
     }
   });
 
-
   return (
-    <div >
-      <Navbar setSearchTerm={setSearchTerm} beersArr={beersArr} handleInput={handleInput} handleAbvClick={handleAbvClick} handlePhClick={handlePhClick} handleRangeClick={handleRangeClick} />
+    <div>
+      {apiBeers && <Navbar 
+      setSearchTerm={setSearchTerm} 
+      handleInput={handleInput} 
+      handleAbvClick={handleAbvClick} 
+      handlePhClick={handlePhClick} 
+      handleRangeClick={handleRangeClick} />}
       <Main beersArr={filteredBeers} />
     </div>
-  )
-}
-
+  );
+};
 
 export default App;
