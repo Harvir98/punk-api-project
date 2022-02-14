@@ -13,7 +13,9 @@ const SearchBar = (props) => {
 
   return (
     <>
+    <p> Search:
     <input type="text" onInput={handleInput} />
+    </p>
     </>
   )
 }
